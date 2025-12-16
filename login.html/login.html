@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gudangku</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="container">
+        <div class="login">
+
+            <!-- ID FORM DITAMBAHKAN -->
+            <form id="loginForm">
+                <h1>LOGIN</h1>
+                <hr>
+                <p>E-GUDANG</p>
+
+                <label for="username">USERNAME</label>
+                <input type="text" id="username" placeholder="Username">
+
+                <label for="password">PASSWORD</label>
+                <div class="password-container">
+                    <input type="password" id="password" placeholder="Password">
+                    <button type="button" id="togglePassword" class="toggle-btn" aria-label="Toggle password visibility">
+                        <!-- Ikon mata tertutup (default) -->
+                        <svg id="eyeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <button type="submit">Login</button>
+
+                <p><a href="#"></a></p>
+                <p>KELOMPOK PKL DISDUKCAPIL</p>
+            </form>
+
+        </div>
+
+        <div class="right">
+            <img src="logodisdukcapil.jpg" alt="">
+        </div>
+    </div>
+
+    <!-- JavaScript untuk login -->
+    <script>
+        // Toggle password visibility
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const eyeIcon = document.getElementById('eyeIcon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                // Ubah ikon ke mata terbuka
+                eyeIcon.innerHTML = `
+                    <path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                    <line x1="2" y1="2" x2="22" y2="22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                `;
+            } else {
+                passwordInput.type = 'password';
+                // Ubah ikon ke mata tertutup
+                eyeIcon.innerHTML = `
+                    <path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                `;
+            }
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            // Cek input kosong
+            if (!username || !password) {
+                alert("Username dan password harus diisi!");
+                return;
+            }
+
+            // Data akun (bisa ditambah sesuka hati)
+            const users = [
+                { username: "admin", password: "123" },
+                { username: "user", password: "112233" },
+            ];
+
+            // Cari user yang cocok
+            const matchUser = users.find(u => u.username === username && u.password === password);
+
+            if (matchUser) {
+                alert("Login berhasil! Mengalihkan ke aplikasi gudang...");
+                window.location.href = "index.html"; 
+            } else {
+                alert("Username atau password salah!");
+            }
+        });
+    </script>
+
+    <style>
+        /* Tambahkan CSS untuk styling ikon mata */
+        .password-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .password-container input {
+            flex: 1;
+         padding-right: 40px; /* Ruang untuk ikon */
+        }
+        .toggle-btn {
+            position: absolute;
+            right: 10px; /* Posisi di sebelah kanan input */
+            left: 130px;
+            top: -20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+            font-size: 16px;
+        }
+        .toggle-btn:hover {
+            color: #000;
+        }
+    </style>
+
+</body>
+</html>
